@@ -12,7 +12,7 @@ class AppColor {
   static Color appBarColor =const Color(0xffFBFBFB);
   static Color textRedColor =const Color(0xffF1452A);
   static Color boxGreyColor =const Color(0xffEDEDED);
-  static Color praimaryColor ="EB8307".toColor();
+  static Color praimaryColor ="ffa200".toColor();
   static Color secendColor =Get.theme.accentColor;
 }
 extension HexColor on String {
