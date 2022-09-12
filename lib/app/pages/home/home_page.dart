@@ -272,6 +272,62 @@ class _HomePageState extends State<HomePage> {
 
                       ],
                     ),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Container(
+                        width: 100.w,
+                        margin: EdgeInsets.symmetric(vertical: 2.h),
+                        child: Row(
+
+                          children:[
+                            Container(
+                              margin: EdgeInsets.only(left: 4.w),
+                              width: 80.w,
+                              height: 20.h,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    
+                                    child:Container(
+                                      width: 80.w,
+                                      height: 16.h,
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Image.network("https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc",fit: BoxFit.cover,)),
+                                    ) ,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomLeft,
+                                    
+                                    child:Container(
+                                     
+                                      child: Text("She-Hulk: Attorney at Law ")
+                                    
+                                    ) ,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+
+                                    child:Container(
+                                    width: 30.w,
+                                      height: 3.h,
+                                      margin: EdgeInsets.only(
+                                        bottom: (2.5).h,
+                                        right: 2.w
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red
+                                      ),
+                                    ) ,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )
