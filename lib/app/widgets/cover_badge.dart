@@ -14,7 +14,7 @@ class GetCoverBadge extends StatelessWidget{
     // TODO: implement build
     return Stack(
       children: [
-        SizedBox.expand(child: child,),
+        child,
         if(subtitle) Positioned(
 
           right: -4.w,

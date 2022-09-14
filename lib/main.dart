@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GetMaterialApp(
-      initialRoute: Routes.HOME,
+      initialRoute: Routes.SPLASH,
       debugShowCheckedModeBanner: false,
       getPages: Routes.routes,
       theme: ThemeData(
