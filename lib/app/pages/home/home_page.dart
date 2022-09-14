@@ -10,6 +10,7 @@ import 'package:text_scroll/text_scroll.dart';
 import 'package:widget_slider/controller.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:zarfilm_android_tv/app/common/app_color.dart';
+import 'package:zarfilm_android_tv/app/widgets/cover_badge.dart';
 
 import '../../common/app_icons.dart';
 import 'home_logic.dart';
@@ -50,252 +51,348 @@ class _HomePageState extends State<HomePage> {
     ));
     return Scaffold(
       backgroundColor: "191919".toColor(),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(height: 1,color: AppColor.praimaryColor,),
+          BottomNavigationBar(
+
+            showUnselectedLabels: true,
+
+            backgroundColor: "181818".toColor(),
+            selectedLabelStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 8.sp),
+            unselectedLabelStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 8.sp),
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
+            items: [
+            BottomNavigationBarItem(icon: SvgPicture.string(IconsUtils.moviesIcon,color: Colors.white,),label: "فیلم ها",activeIcon:SvgPicture.string(IconsUtils.moviesIcon,color: AppColor.praimaryColor,), ),
+            BottomNavigationBarItem(icon: SvgPicture.string(IconsUtils.seriesIcon,color: Colors.white,),label: "سریال‌ها",activeIcon:SvgPicture.string(IconsUtils.seriesIcon,color: AppColor.praimaryColor,) ),
+            BottomNavigationBarItem(icon: SvgPicture.string(IconsUtils.homeIcon,color: Colors.white,),label: "خانه",activeIcon:SvgPicture.string(IconsUtils.homeIcon,color: AppColor.praimaryColor,) ),
+            BottomNavigationBarItem(icon: SvgPicture.string(IconsUtils.watchListIcon,color: Colors.white,),label: "مشاهده‌ها",activeIcon:SvgPicture.string(IconsUtils.watchListIcon,color: AppColor.praimaryColor,) ),
+            BottomNavigationBarItem(icon: SvgPicture.string(IconsUtils.wishlistIcon,color: Colors.white,),label: "علاقه‌مندی",activeIcon:SvgPicture.string(IconsUtils.wishlistIcon,color: AppColor.praimaryColor,) ),
+          ],),
+        ],
+      ),
       body: SafeArea(
         child: Container(
           // padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                height: 9.h,
-                child: Stack(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 8.w,
-                          height: 8.w,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.white.withOpacity(0.3),
-                                  width: 2),
-                              borderRadius: BorderRadius.circular(10)),
-                          padding: EdgeInsets.all((1.5).w),
-                          child: MaterialButton(
-                              padding: EdgeInsets.zero,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              onPressed: () {},
-                              child: SvgPicture.string(
-                               IconsAll.user,
-                                color: Colors.white,
-                              )),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 8.w,
-                              height: 8.w,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.white.withOpacity(0.3),
-                                      width: 2),
-                                  borderRadius: BorderRadius.circular(10)),
-                              padding: EdgeInsets.all((1).w),
-                              child: MaterialButton(
-                                  padding: EdgeInsets.zero,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  onPressed: () {},
-                                  child: SvgPicture.asset(
-                                    "assets/image/flaticon-2811806-magnifying-glass.svg",
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            SizedBox(
-                              width: 3.w,
-                            ),
-                            Container(
-                              width: 8.w,
-                              height: 8.w,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.white.withOpacity(0.3),
-                                      width: 2),
-                                  borderRadius: BorderRadius.circular(10)),
-                              padding: EdgeInsets.all((1.5).w),
-                              child: MaterialButton(
-                                  padding: EdgeInsets.zero,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  onPressed: () {},
-                                  child: SvgPicture.asset(
-                                    "assets/image/flaticon-747327-menu.svg",
-                                    color: Colors.white,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Image.asset(
-                        "assets/image/logo.png",
-                        height: 5.h,
-                        width: 5.h,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              WidgetSlider(
-                fixedSize: 200,
-                infiniteScroll: true,
-
-                proximity: 0.35,
-                controller: controller,
-                itemCount: images.length,
-                itemBuilder: (context, index, activeIndex) {
-                  return Container(
-                    margin: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(images[index]),
-                      ),
-
-
-                    ),
-                  );
-                },
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 6.w,vertical: 2.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(width: 8.w,height: 8.w,
-                        decoration: BoxDecoration(
-                          color: AppColor.praimaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                        padding: EdgeInsets.all((1.8).w),
-                        child: Center(
-                          child: SvgPicture.asset("assets/image/flaticon-2617271-play-button.svg",color: AppColor.praimaryColor,),
-                        ),
-                        ),
-                        SizedBox(height: 4,),
-                        Row(
-                          children: [
-                            Text("TOP",style: TextStyle(color: AppColor.praimaryColor),),
-                            Text("10",style: TextStyle(color: Colors.white),),
-                          ],
-                        ),
-                        SizedBox(height: 6,),
-
-                        Text("Series",style: TextStyle(color: Colors.white.withOpacity(0.5),fontWeight: FontWeight.w200),),
-
-                      ],
-                    ),
-                    Expanded(child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 4.w),
-                      child: Column(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  height: 9.h,
+                  child: Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextScroll("She-Hulk: Attorney at Law She-Hulk: Attorney at Law"
-                            ,style: TextStyle(fontWeight: FontWeight.bold),
-                            delayBefore: Duration(
-                              milliseconds: 300,
-                            ),
-
+                          Container(
+                            width: 8.w,
+                            height: 8.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.white.withOpacity(0.3),
+                                    width: 2),
+                                borderRadius: BorderRadius.circular(10)),
+                            padding: EdgeInsets.all((1.5).w),
+                            child: MaterialButton(
+                                padding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                onPressed: () {},
+                                child: SvgPicture.string(
+                                 IconsUtils.user,
+                                  color: Colors.white,
+                                )),
                           ),
-                          Text("2022",style: TextStyle(fontWeight: FontWeight.w200),),
+                          Row(
+                            children: [
+                              Container(
+                                width: 8.w,
+                                height: 8.w,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.3),
+                                        width: 2),
+                                    borderRadius: BorderRadius.circular(10)),
+                                padding: EdgeInsets.all((1.5).w),
+                                child: MaterialButton(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10)),
+                                    onPressed: () {},
+                                    child: SvgPicture.string(
+                                      IconsUtils.searchIcon,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 3.w,
+                              ),
+                              Container(
+                                width: 8.w,
+                                height: 8.w,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.3),
+                                        width: 2),
+                                    borderRadius: BorderRadius.circular(10)),
+                                padding: EdgeInsets.all((1).w),
+                                child: MaterialButton(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10)),
+                                    onPressed: () {},
+                                    child: SvgPicture.string(
+                                      IconsUtils.menuIcon,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    )),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(width: 8.w,height: 8.w,
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Image.asset(
+                          "assets/image/logo.png",
+                          height: 5.h,
+                          width: 5.h,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                WidgetSlider(
+                  fixedSize: 200,
+                  infiniteScroll: true,
+
+                  proximity: 0.35,
+                  controller: controller,
+                  itemCount: images.length,
+                  itemBuilder: (context, index, activeIndex) {
+                    return GetCoverBadge(dubbed: false,subtitle: true,
+                      child: Container(
+                        //margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: AppColor.praimaryColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(10)
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(images[index]),
+                          ),
+
+
                         ),
-                        padding: EdgeInsets.all((1.8).w),
-                        child: Center(
-                          child: SvgPicture.asset("assets/image/flaticon-2550223-favorite.svg",color: AppColor.praimaryColor,),
-                        ),
-                        ),
-                        SizedBox(height: 4,),
-                        Row(
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6.w,vertical: 2.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(width: 8.w,height: 8.w,
+                          decoration: BoxDecoration(
+                            color: AppColor.praimaryColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          padding: EdgeInsets.all((1.8).w),
+                          child: Center(
+                            child: SvgPicture.string(IconsUtils.PlayIcon,color: AppColor.praimaryColor,),
+                          ),
+                          ),
+                          SizedBox(height: 4,),
+                          Row(
+                            children: [
+                              Text("TOP",style: TextStyle(color: AppColor.praimaryColor),),
+                              Text("10",style: TextStyle(color: Colors.white),),
+                            ],
+                          ),
+                          SizedBox(height: 6,),
+
+                          Text("Series",style: TextStyle(color: Colors.white.withOpacity(0.5),fontWeight: FontWeight.w200),),
+
+                        ],
+                      ),
+                      Expanded(child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 4.w),
+                        child: Column(
                           children: [
-                            Text("9.2",style: TextStyle(color: AppColor.praimaryColor),),
-                            Text(" /10",style: TextStyle(color: Colors.white),),
+                            TextScroll("She-Hulk: Attorney at Law She-Hulk: Attorney at Law"
+                              ,style: TextStyle(fontWeight: FontWeight.bold),
+                              delayBefore: Duration(
+                                milliseconds: 300,
+                              ),
+
+                            ),
+                            Text("2022",style: TextStyle(fontWeight: FontWeight.w200),),
                           ],
                         ),
-                        SizedBox(height: 6,),
-
-                        Text("498/200",style: TextStyle(color: Colors.white.withOpacity(0.5),fontWeight: FontWeight.w200),),
-
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 100.w,
-                      decoration: BoxDecoration(
-                        color: "ffc64b".toColor(),
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      padding: EdgeInsets.all(2.w),
-                      child: Directionality(
-
-                          textDirection: TextDirection.rtl,child: Text("دانلود و تماشا فقط با IP ایران امکان پذیر هست.",style: TextStyle(
-                        color: "3d3d3d".toColor()
-                      ),)),
-                    ),
-                    SizedBox(height: 2.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 15.w,
-                          height: 4.h,
+                      )),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(width: 8.w,height: 8.w,
                           decoration: BoxDecoration(
-                              color: "212121".toColor(),
-                            borderRadius: BorderRadius.circular(100)
+                            color: AppColor.praimaryColor.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(10)
                           ),
+                          padding: EdgeInsets.all((1.8).w),
                           child: Center(
-                            child:  Text("بیشتر",style: TextStyle(color: Colors.white.withOpacity(0.5)),),
+                            child: SvgPicture.string(IconsUtils.StarIcon,color: AppColor.praimaryColor,),
                           ),
-                        ),
-                        Text("سریال های بروز شده",style: TextStyle(color: Colors.white.withOpacity(0.5)),),
+                          ),
+                          SizedBox(height: 4,),
+                          Row(
+                            children: [
+                              Text("9.2",style: TextStyle(color: AppColor.praimaryColor),),
+                              Text(" /10",style: TextStyle(color: Colors.white),),
+                            ],
+                          ),
+                          SizedBox(height: 6,),
 
-                      ],
-                    ),
+                          Text("498/200",style: TextStyle(color: Colors.white.withOpacity(0.5),fontWeight: FontWeight.w200),),
 
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 2.w),
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Container(
-                    width: 100.w,
-                    margin: EdgeInsets.symmetric(vertical: 2.h),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 100.w,
+                        decoration: BoxDecoration(
+                          color: "ffc64b".toColor(),
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.all(2.w),
+                        child: Directionality(
 
-                        children:[
+                            textDirection: TextDirection.rtl,child: Text("دانلود و تماشا فقط با IP ایران امکان پذیر هست.",style: TextStyle(
+                          color: "3d3d3d".toColor()
+                        ),)),
+                      ),
+                      SizedBox(height: 2.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Container(
-                            margin: EdgeInsets.only(left: 4.w),
-                            width: 80.w,
-                            height: 20.h,
-                            child: MaterialButton(
-                              onPressed: (){},
-                              padding: EdgeInsets.zero,
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                              borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child:  Text("بیشتر",style: TextStyle(color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("سریال های بروز شده",style: TextStyle(color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children:[
+                            Container(
+                              margin: EdgeInsets.only(left: 4.w),
+                              width: 80.w,
+                              height: 20.h,
+                              child: MaterialButton(
+                                onPressed: (){},
+                                padding: EdgeInsets.zero,
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topRight,
+
+                                      child:Container(
+                                        width: 80.w,
+                                        height: 16.h,
+                                        child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Image.network("https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc",fit: BoxFit.cover,)),
+                                      ) ,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomLeft,
+
+                                      child:Container(
+
+                                          child: Text("She-Hulk: Attorney at Law ")
+
+                                      ) ,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+
+                                      child:Container(
+                                        height: 4.h,
+                                        margin: EdgeInsets.only(
+                                            bottom: 2.h,
+                                            right: 2.w
+                                        ),
+                                        decoration: BoxDecoration(
+                                            color: "121b20".toColor(),
+                                            borderRadius: BorderRadius.circular(5)
+
+                                        ),
+                                        padding: EdgeInsets.all(3),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text("فصل اول",style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 9.sp
+                                            ),),
+                                            SizedBox(width: 2.w,),
+                                            Container(
+                                              padding: EdgeInsets.all(4),
+
+                                              decoration: BoxDecoration(
+                                                  color: AppColor.praimaryColor,
+                                                  borderRadius: BorderRadius.circular(5)
+                                              ),
+                                              child:  Text("فصل اول",style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:8.sp,
+
+                                                  color: Colors.white
+                                              ),),
+                                            )
+                                          ],
+                                        ),
+                                      ) ,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 4.w),
+                              width: 80.w,
+                              height: 20.h,
                               child: Stack(
                                 children: [
                                   Align(
@@ -306,7 +403,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 16.h,
                                       child: ClipRRect(
                                           borderRadius: BorderRadius.circular(10),
-                                          child: Image.network("https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc",fit: BoxFit.cover,)),
+                                          child:  GetCoverBadge(dubbed: true,child: Image.network("https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc",fit: BoxFit.cover,)),),
                                     ) ,
                                   ),
                                   Align(
@@ -362,84 +459,132 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4.w),
-                            width: 80.w,
-                            height: 20.h,
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topRight,
-
-                                  child:Container(
-                                    width: 80.w,
-                                    height: 16.h,
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network("https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc",fit: BoxFit.cover,)),
-                                  ) ,
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-
-                                  child:Container(
-
-                                      child: Text("She-Hulk: Attorney at Law ")
-
-                                  ) ,
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-
-                                  child:Container(
-                                    height: 4.h,
-                                    margin: EdgeInsets.only(
-                                        bottom: 2.h,
-                                        right: 2.w
-                                    ),
-                                    decoration: BoxDecoration(
-                                        color: "121b20".toColor(),
-                                        borderRadius: BorderRadius.circular(5)
-
-                                    ),
-                                    padding: EdgeInsets.all(3),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text("فصل اول",style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 9.sp
-                                        ),),
-                                        SizedBox(width: 2.w,),
-                                        Container(
-                                          padding: EdgeInsets.all(4),
-
-                                          decoration: BoxDecoration(
-                                              color: AppColor.praimaryColor,
-                                              borderRadius: BorderRadius.circular(5)
-                                          ),
-                                          child:  Text("فصل اول",style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:8.sp,
-
-                                              color: Colors.white
-                                          ),),
-                                        )
-                                      ],
-                                    ),
-                                  ) ,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              )
-            ],
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child:  Text("بیشتر",style: TextStyle(color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("فیلم های جدید",style: TextStyle(color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children:[
+                            Container(
+                              width: 30.w,
+                              //height: 25.h,
+                              padding: EdgeInsets.all((1.5).w),
+                              decoration: BoxDecoration(
+                                color: "272727".toColor(),
+                                borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ClipRRect(
+
+                                    child: Image.network("https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOX"
+                                        "pVb_--v3rGzmS-3chmG2L1MS-mc",height: 20.h,),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  SizedBox(height: 4,),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: TextScroll("She-Hulk: Attorney at Law She-Hulk: Attorney at Law",textAlign: TextAlign.left,style: TextStyle(
+                                      fontSize: 9.sp,fontWeight: FontWeight.bold,
+                                    ),),
+                                  ),
+                                  SizedBox(height: 1.h,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 12.w,
+                                        height: 2.h,
+                                        padding: EdgeInsets.symmetric(horizontal: 2,vertical: 1),
+                                        decoration: BoxDecoration(
+                                            color: AppColor.praimaryColor,
+                                            borderRadius: BorderRadius.circular(3)
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("7.2",style: TextStyle(fontSize: 7.sp,fontWeight: FontWeight.bold),),
+
+                                            Text("IMDB ",style: TextStyle(fontSize: 7.sp),),
+                                          ],
+                                        ),
+                                      ),
+                                      Text("2022",style: TextStyle(fontWeight: FontWeight.w200,color: Colors.white.withOpacity(0.5)),),
+
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 12.w,
+                                        height: (1.8).h,
+                                        padding: EdgeInsets.symmetric(horizontal: 2,vertical: 1),
+                                        decoration: BoxDecoration(
+                                            color:"363636".toColor(),
+                                            borderRadius: BorderRadius.circular(3)
+                                        ),
+                                        child: Text("فصل اول",style: TextStyle(fontSize: 6.sp),textAlign: TextAlign.right,),
+                                      ),
+                                      SizedBox(width: 3.w,),
+                                      Expanded(child: TextScroll("قسمت 66",style: TextStyle(fontWeight:
+                                      FontWeight.w200,color: Colors.white.withOpacity(0.5),fontSize: 6.sp),)),
+
+                                    ],
+                                  ),
+
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
           ),
         ),
       ),
