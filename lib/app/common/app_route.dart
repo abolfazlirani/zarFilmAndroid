@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 import 'package:zarfilm_android_tv/app/pages/home/home_page.dart';
 import 'package:zarfilm_android_tv/app/pages/login/view.dart';
+import 'package:zarfilm_android_tv/app/pages/single_movie/view.dart';
 
 import '../pages/splash/view.dart';
 
@@ -9,6 +10,7 @@ class Routes {
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const SPLASH = '/splash';
+  static const SINGLEMOVIE = '/SingleMovie';
 
   static final routes = [
     GetPage(
@@ -22,6 +24,10 @@ class Routes {
     GetPage(
       name: Routes.SPLASH,
       page: () => SplashPage(),
+    ),
+    GetPage(
+      name: Routes.SINGLEMOVIE,
+      page: () => SingleMoviePage(),
     ),
   ];
 }

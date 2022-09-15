@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       getPages: Routes.routes,
       theme: ThemeData(
 
+          scaffoldBackgroundColor: "171717".toColor(),
           primaryColor: AppColor.praimaryColor,
 
           brightness: Brightness.dark,

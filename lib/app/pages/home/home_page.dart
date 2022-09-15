@@ -14,6 +14,7 @@ import 'package:zarfilm_android_tv/app/widgets/cover_badge.dart';
 
 import '../../../gen/json/base/HomeJsonDataModel.dart';
 import '../../common/app_icons.dart';
+import '../../widgets/HeaderWidget.dart';
 import '../../widgets/HomeSeriesWidget.dart';
 import '../../widgets/HomeMiniWidget.dart';
 import '../../widgets/HomeGenreWidget.dart';
@@ -34,12 +35,12 @@ class _HomePageState extends State<HomePage> {
     Get.delete<HomeLogic>();
     super.dispose();
   }
+  final controller = SliderController(
+    duration: const Duration(milliseconds: 600),
+  );
 
   @override
   Widget build(BuildContext context) {
-    final controller = SliderController(
-      duration: const Duration(milliseconds: 600),
-    );
 
     final images = const [
       'https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc',
@@ -107,93 +108,7 @@ class _HomePageState extends State<HomePage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  height: 9.h,
-                  child: Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 8.w,
-                            height: 8.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.white.withOpacity(0.3),
-                                    width: 2),
-                                borderRadius: BorderRadius.circular(10)),
-                            padding: EdgeInsets.all((1.5).w),
-                            child: MaterialButton(
-                                padding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                onPressed: () {},
-                                child: SvgPicture.string(
-                                  IconsUtils.user,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 8.w,
-                                height: 8.w,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white.withOpacity(0.3),
-                                        width: 2),
-                                    borderRadius: BorderRadius.circular(10)),
-                                padding: EdgeInsets.all((1.5).w),
-                                child: MaterialButton(
-                                    padding: EdgeInsets.zero,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10)),
-                                    onPressed: () {},
-                                    child: SvgPicture.string(
-                                      IconsUtils.searchIcon,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                              SizedBox(
-                                width: 3.w,
-                              ),
-                              Container(
-                                width: 8.w,
-                                height: 8.w,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white.withOpacity(0.3),
-                                        width: 2),
-                                    borderRadius: BorderRadius.circular(10)),
-                                padding: EdgeInsets.all((1).w),
-                                child: MaterialButton(
-                                    padding: EdgeInsets.zero,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10)),
-                                    onPressed: () {},
-                                    child: SvgPicture.string(
-                                      IconsUtils.menuIcon,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset(
-                          "assets/image/logo.png",
-                          height: 5.h,
-                          width: 5.h,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                HeaderWidget(isHomePage: true),
                 WidgetSlider(
                   fixedSize: 200,
                   infiniteScroll: true,
@@ -261,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 6,),
 
-                            Text("Series", style: TextStyle(
+                            Text(state.mainSug.value.type ?? "", style: TextStyle(
                                 color: Colors.white.withOpacity(0.5),
                                 fontWeight: FontWeight.w200),),
 
@@ -632,6 +547,247 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child: Text("بیشتر", style: TextStyle(
+                                  color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("سریال های زیرنویس چسبیده", style: TextStyle(
+                              color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children: state.homeJsonDataModel.subtitleSeries!
+                              .items!.asMap().entries.map((e) =>
+                              HomeMiniWidget(e.value, true)).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child: Text("بیشتر", style: TextStyle(
+                                  color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("انیمیشن ها", style: TextStyle(
+                              color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children: state.homeJsonDataModel.animations!
+                              .items!.asMap().entries.map((e) =>
+                              HomeMiniWidget(e.value, false)).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child: Text("بیشتر", style: TextStyle(
+                                  color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("فیلم های هندی", style: TextStyle(
+                              color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children: state.homeJsonDataModel.indianMovies!
+                              .items!.asMap().entries.map((e) =>
+                              HomeMiniWidget(e.value, false)).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child: Text("بیشتر", style: TextStyle(
+                                  color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("انیمه ها", style: TextStyle(
+                              color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children: state.homeJsonDataModel.animes!
+                              .items!.asMap().entries.map((e) =>
+                              HomeMiniWidget(e.value, true)).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child: Column(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 15.w,
+                            height: 4.h,
+                            decoration: BoxDecoration(
+                                color: "212121".toColor(),
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: Center(
+                              child: Text("بیشتر", style: TextStyle(
+                                  color: Colors.white.withOpacity(0.5)),),
+                            ),
+                          ),
+                          Text("سریال های کره ای", style: TextStyle(
+                              color: Colors.white.withOpacity(0.5)),),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      width: 100.w,
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+
+                          children: state.homeJsonDataModel.koreanTvSeries!
+                              .items!.asMap().entries.map((e) =>
+                              HomeMiniWidget(e.value, true)).toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
                 SizedBox(height: 10.h,)
 
               ],
@@ -652,5 +808,8 @@ class _HomePageState extends State<HomePage> {
     state.homeJsonDataModel = Get.arguments[0];
     state.fromJsonSplash = Get.arguments[1];
     state.mainSug.value = state.homeJsonDataModel.suggestions!.elementAt(0);
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      controller.moveToNext!();
+    });
   }
 }
