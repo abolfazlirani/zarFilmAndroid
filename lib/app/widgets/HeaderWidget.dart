@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../common/app_icons.dart';
@@ -68,7 +69,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   SizedBox(
                     width: 3.w,
                   ),
-                  Container(
+                 if(widget.isHomePage) Container(
                     width: 8.w,
                     height: 8.w,
                     decoration: BoxDecoration(
@@ -85,6 +86,28 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                         onPressed: () {},
                         child: SvgPicture.string(
                           IconsUtils.menuIcon,
+                          color: Colors.white,
+                        )),
+                  ),
+                 if(!widget.isHomePage) Container(
+                    width: 8.w,
+                    height: 8.w,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                            width: 2),
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.all((1).w),
+                    child: MaterialButton(
+                        padding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10)),
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: SvgPicture.string(
+                          IconsUtils.nextIcon,
                           color: Colors.white,
                         )),
                   ),

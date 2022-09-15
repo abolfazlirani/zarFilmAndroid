@@ -242,7 +242,7 @@ class Items {
       this.season,});
 
   Items.fromJson(dynamic json) {
-    postID = json['postID'];
+    postID = json['postID'].toString();
     type = json['type'];
     image = json['image'];
     rate = json['rate'];
@@ -253,7 +253,7 @@ class Items {
     part = json['part'];
     season = json['season'];
   }
-  num? postID;
+  String? postID;
   String? type;
   String? image;
   String? rate;
@@ -263,7 +263,7 @@ class Items {
   String? subtitle;
   String? part;
   String? season;
-Items copyWith({  num? postID,
+Items copyWith({  String? postID,
   String? type,
   String? image,
   String? rate,
