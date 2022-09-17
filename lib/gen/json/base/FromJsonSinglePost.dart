@@ -1,4 +1,3 @@
-/*
 class FromJsonSinglePost {
   FromJsonSinglePost({
       this.fserieslinks, 
@@ -46,112 +45,201 @@ class FromJsonSinglePost {
       this.moviesLinks, 
       this.moviesOnlinePlay,});
 
+
   FromJsonSinglePost.fromJson(dynamic json) {
-    fserieslinks = json['fserieslinks'] != null ? Fserieslinks.fromJson(json['fserieslinks']) : null;
-    if (json['seriesLinks'] != null) {
-      seriesLinks = [];
-      json['seriesLinks'].forEach((v) {
-        seriesLinks?.add(SeriesLinks.fromJson(v));
+    print('FromJsonSinglePost.fromJson 0 ');
+    season = json['season'];
+    print('FromJsonSinglePost.fromJson 1 ');
+    try {
+      if (json['seriesLinks'] != null){
+        for (int i = 0; i < int.parse(season??"0"); i++) {
+          if (json['seriesLinks']['$i'] != null) {
+            json['seriesLinks']['$i'].forEach((v) {
+              seriesLinks?.add(SeriesLinks.fromJson(v));
+            });
+          }
+        }
+      }
+    }  catch (e) {
+      // TODO
+    }
+    print('FromJsonSinglePost.fromJson 2 ');
+    if (json['playmovies'] != null&&json['playmovies'] is List) {
+      playmovies = [];
+      json['playmovies'].forEach((v) {
+        playmovies?.add(Playmovies.fromJson(v));
       });
     }
-    playmovies = json['playmovies'];
+    print('FromJsonSinglePost.fromJson 3 ');
     if (json['playseries'] != null) {
       playseries = [];
       json['playseries'].forEach((v) {
         playseries?.add(Playseries.fromJson(v));
       });
     }
-    if (json['series_online_play'] != null) {
-      seriesOnlinePlay = [];
-      json['series_online_play'].forEach((v) {
-        seriesOnlinePlay?.add(SeriesOnlinePlay.fromJson(v));
-      });
+    print('FromJsonSinglePost.fromJson 4 ');
+    try {
+      if (json['series_online_play'] != null) {
+        for (int i = 0; i < int.parse(season??"0"); i++) {
+          if (json['series_online_play']['$i'] != null) {
+            json['series_online_play']['$i'].forEach((v) {
+              seriesOnlinePlay?.add(SeriesOnlinePlay.fromJson(v));
+            });
+          }
+        }
+      
+      }
+    }  catch (e) {
+      // TODO
     }
-    if (json['collection'] != null) {
-      collection = [];
-      json['collection'].forEach((v) {
-        collection?.add(Dynamic.fromJson(v));
-      });
+    print('FromJsonSinglePost.fromJson 5 ');
+    try {
+      if (json['collection'] != null) {
+        collection = [];
+        json['collection'].forEach((v) {
+         // collection?.add(v.toString());
+        });
+      }
+    }  catch (e) {
+      // TODO
     }
+    print('FromJsonSinglePost.fromJson 6 ');
     if (json['release'] != null) {
       release = [];
       json['release'].forEach((v) {
         release?.add(Release.fromJson(v));
       });
     }
+    print('FromJsonSinglePost.fromJson 7 ');
     if (json['actor'] != null) {
       actor = [];
       json['actor'].forEach((v) {
         actor?.add(Actor.fromJson(v));
       });
     }
+    print('FromJsonSinglePost.fromJson 8 ');
     if (json['cast'] != null) {
       cast = [];
       json['cast'].forEach((v) {
         cast?.add(Cast.fromJson(v));
       });
     }
+    print('FromJsonSinglePost.fromJson 9 ');
     postID = json['postID'];
+    print('FromJsonSinglePost.fromJson 10 ');
     type = json['type'];
+    print('FromJsonSinglePost.fromJson 11 ');
     image = json['image'];
+    print('FromJsonSinglePost.fromJson 12 ');
     rate = json['rate'];
+    print('FromJsonSinglePost.fromJson 13 ');
     online = json['online'];
+    print('FromJsonSinglePost.fromJson 14 ');
     vote = json['vote'];
+    print('FromJsonSinglePost.fromJson 15 ');
     title = json['title'];
+    print('FromJsonSinglePost.fromJson 16 ');
     faTitle = json['fa_title'];
+    print('FromJsonSinglePost.fromJson 17 ');
     quality = json['quality'];
+    print('FromJsonSinglePost.fromJson 18 ');
     dubbed = json['dubbed'];
+    print('FromJsonSinglePost.fromJson 19 ');
     if (json['genre'] != null) {
       genre = [];
       json['genre'].forEach((v) {
         genre?.add(Genre.fromJson(v));
       });
     }
+    print('FromJsonSinglePost.fromJson 20 ');
     notif = json['notif'];
+    print('FromJsonSinglePost.fromJson 21 ');
     watchlist = json['watchlist'];
+    print('FromJsonSinglePost.fromJson 22 ');
     subscriber = json['subscriber'];
+    print('FromJsonSinglePost.fromJson 23 ');
     percentLike = json['percent_like'];
+    print('FromJsonSinglePost.fromJson 24 ');
     likeDisCount = json['like_dis_count'];
+    print('FromJsonSinglePost.fromJson 25 ');
     subtitle = json['subtitle'];
+    print('FromJsonSinglePost.fromJson 26 ');
     imdbid = json['imdbid'];
+    print('FromJsonSinglePost.fromJson 27 ');
     trailer = json['trailer'];
+    print('FromJsonSinglePost.fromJson 28 ');
     part = json['part'];
+    print('FromJsonSinglePost.fromJson 29 ');
     chanel = json['chanel'];
-    season = json['season'];
+    print('FromJsonSinglePost.fromJson 30 ');
+
+    print('FromJsonSinglePost.fromJson 31 ');
     zarfilmRate = json['zarfilmRate'];
+    print('FromJsonSinglePost.fromJson 32 ');
     zarfilmRateCount = json['zarfilmRateCount'];
+    print('FromJsonSinglePost.fromJson 33 ');
     plot = json['plot'];
+    print('FromJsonSinglePost.fromJson 34 ');
     age = json['age'];
+    print('FromJsonSinglePost.fromJson 35 ');
     runtime = json['runtime'];
+    print('FromJsonSinglePost.fromJson 36 ');
     language = json['language'];
+    print('FromJsonSinglePost.fromJson 37 ');
     if (json['director'] != null) {
       director = [];
       json['director'].forEach((v) {
-        director?.add(Dynamic.fromJson(v));
+       // director?.add(v.toString());
       });
     }
+    print('FromJsonSinglePost.fromJson 38 ');
     top250 = json['top250'];
+    print('FromJsonSinglePost.fromJson 39 ');
     awards = json['awards'];
+    print('FromJsonSinglePost.fromJson 40 ');
     if (json['lists'] != null) {
       lists = [];
       json['lists'].forEach((v) {
         lists?.add(Lists.fromJson(v));
       });
     }
-    fmovieslinks = json['fmovieslinks'];
+    print('FromJsonSinglePost.fromJson 41 ');
+
+    try {
+      if (json['fmovieslinks'] != null) {
+        for (int i = 0; i < int.parse(season??"0"); i++) {
+          if (json['$i'] != null) {
+            json['$i'].forEach((v) {
+              fmovieslinks?.add(Fmovieslinks.fromJson(v));
+            });
+          }
+        }
+      }
+    }  catch (e) {
+      // TODO
+    }
+    print('FromJsonSinglePost.fromJson 42 ');
     moviesLinks = json['moviesLinks'] != null ? MoviesLinks.fromJson(json['moviesLinks']) : null;
+    print('FromJsonSinglePost.fromJson 43 ');
     if (json['movies_online_play'] != null) {
       moviesOnlinePlay = [];
       json['movies_online_play'].forEach((v) {
-        moviesOnlinePlay?.add(Dynamic.fromJson(v));
+      //  moviesOnlinePlay?.add(v.toString());
       });
     }
+    print('FromJsonSinglePost.fromJson 44 ');
+    if (season!.length>0) {
+      print('FromJsonSinglePost.fromJson = $season');
+      fserieslinks = json['fserieslinks'] != null ? Fserieslinks.fromJson(json['fserieslinks'],season??"") : null;
+    }
+    print('FromJsonSinglePost.fromJson 45 ');
+
   }
   Fserieslinks? fserieslinks;
-  List<List<SeriesLinks>>? seriesLinks;
-  String? playmovies;
+  List<SeriesLinks>? seriesLinks;
+  List<Playmovies>? playmovies;
   List<Playseries>? playseries;
-  List<List<SeriesOnlinePlay>>? seriesOnlinePlay;
+  List<SeriesOnlinePlay>? seriesOnlinePlay;
   List<dynamic>? collection;
   List<Release>? release;
   List<Actor>? actor;
@@ -188,14 +276,14 @@ class FromJsonSinglePost {
   String? top250;
   String? awards;
   List<Lists>? lists;
-  String? fmovieslinks;
+  List<Fmovieslinks>? fmovieslinks;
   MoviesLinks? moviesLinks;
   List<dynamic>? moviesOnlinePlay;
 FromJsonSinglePost copyWith({  Fserieslinks? fserieslinks,
-  List<List<SeriesLinks>>? seriesLinks,
-  String? playmovies,
+  List<SeriesLinks>? seriesLinks,
+  List<Playmovies>? playmovies,
   List<Playseries>? playseries,
-  List<List<SeriesOnlinePlay>>? seriesOnlinePlay,
+  List<SeriesOnlinePlay>? seriesOnlinePlay,
   List<dynamic>? collection,
   List<Release>? release,
   List<Actor>? actor,
@@ -232,7 +320,7 @@ FromJsonSinglePost copyWith({  Fserieslinks? fserieslinks,
   String? top250,
   String? awards,
   List<Lists>? lists,
-  String? fmovieslinks,
+  List<Fmovieslinks>? fmovieslinks,
   MoviesLinks? moviesLinks,
   List<dynamic>? moviesOnlinePlay,
 }) => FromJsonSinglePost(  fserieslinks: fserieslinks ?? this.fserieslinks,
@@ -293,7 +381,7 @@ FromJsonSinglePost copyWith({  Fserieslinks? fserieslinks,
       map['playseries'] = playseries?.map((v) => v.toJson()).toList();
     }
     if (seriesOnlinePlay != null) {
-      map['series_online_play'] = seriesOnlinePlay?.map((v) => v.toJson()).toList();
+     // map['series_online_play'] = seriesOnlinePlay?.map((v) => v.toJson()).toList();
     }
     if (collection != null) {
       map['collection'] = collection?.map((v) => v.toJson()).toList();
@@ -366,13 +454,13 @@ class MoviesLinks {
     if (json['dubled'] != null) {
       dubled = [];
       json['dubled'].forEach((v) {
-        dubled?.add(Dynamic.fromJson(v));
+       // dubled?.add(v.toString());
       });
     }
     if (json['sticky_subtitle'] != null) {
       stickySubtitle = [];
       json['sticky_subtitle'].forEach((v) {
-        stickySubtitle?.add(Dynamic.fromJson(v));
+     //   stickySubtitle?.add(v.toString());
       });
     }
   }
@@ -856,51 +944,27 @@ SeriesLinks copyWith({  String? nameseason,
 
 class Fserieslinks {
   Fserieslinks({
-      this., 
-      this., 
-      this.,});
+      this.singleF,
+    });
 
-  Fserieslinks.fromJson(dynamic json) {
-    if (json['1'] != null) {
-       = [];
-      json['1'].forEach((v) {
-        ?.add(1.fromJson(v));
-      });
-    }
-    if (json['2'] != null) {
-       = [];
-      json['2'].forEach((v) {
-        ?.add(2.fromJson(v));
-      });
-    }
-    if (json['3'] != null) {
-       = [];
-      json['3'].forEach((v) {
-        ?.add(3.fromJson(v));
-      });
+  Fserieslinks.fromJson(dynamic json, String s) {
+    for (int i = 0; i < int.parse(s); i++) {
+      if (json['$i'] != null) {
+        json['$i'].forEach((v) {
+          singleF?.add(SingleFSeries.fromJson(v));
+        });
+      }
     }
   }
-  List<1>? ;
-  List<2>? ;
-  List<3>? ;
-Fserieslinks copyWith({  List<1>? ,
-  List<2>? ,
-  List<3>? ,
-}) => Fserieslinks(  :  ?? this.,
-  :  ?? this.,
-  :  ?? this.,
-);
+  List<SingleFSeries>? singleF;
+
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if ( != null) {
-      map['1'] = ?.map((v) => v.toJson()).toList();
+    if (singleF != null) {
+      map['singleF'] = singleF?.map((v) => v.toJson()).toList();
     }
-    if ( != null) {
-      map['2'] = ?.map((v) => v.toJson()).toList();
-    }
-    if ( != null) {
-      map['3'] = ?.map((v) => v.toJson()).toList();
-    }
+
     return map;
   }
 
@@ -941,27 +1005,7 @@ class SingleFSeries {
   List<String>? dllinktitle;
   List<String>? dllinkpart;
   List<String>? dllinkdub;
-  SingleFSeries. copyWith({  String? nameseason,
-  String? qulityseason,
-  String? countpartseason,
-  String? avgsizeseason,
-  String? subtitle,
-  String? subtitleType,
-  String? dubbing,
-  List<String>? dllinktitle,
-  List<String>? dllinkpart,
-  List<String>? dllinkdub,
-}) => SingleFSeries(  nameseason: nameseason ?? this.nameseason,
-  qulityseason: qulityseason ?? this.qulityseason,
-  countpartseason: countpartseason ?? this.countpartseason,
-  avgsizeseason: avgsizeseason ?? this.avgsizeseason,
-  subtitle: subtitle ?? this.subtitle,
-  subtitleType: subtitleType ?? this.subtitleType,
-  dubbing: dubbing ?? this.dubbing,
-  dllinktitle: dllinktitle ?? this.dllinktitle,
-  dllinkpart: dllinkpart ?? this.dllinkpart,
-  dllinkdub: dllinkdub ?? this.dllinkdub,
-);
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['nameseason'] = nameseason;
@@ -979,4 +1023,79 @@ class SingleFSeries {
 
 }
 
-*/
+class Playmovies {
+  Playmovies({
+    this.qualityonline,
+    this.linkonplay,
+    this.vttLink,
+    this.type,});
+
+  Playmovies.fromJson(dynamic json) {
+    qualityonline = json['qualityonline'];
+    linkonplay = json['linkonplay'];
+    vttLink = json['vtt_link'];
+    type = json['type'];
+  }
+  String? qualityonline;
+  String? linkonplay;
+  String? vttLink;
+  String? type;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['qualityonline'] = qualityonline;
+    map['linkonplay'] = linkonplay;
+    map['vtt_link'] = vttLink;
+    map['type'] = type;
+    return map;
+  }
+
+}
+class Fmovieslinks {
+  Fmovieslinks({
+    this.qualityFilm,
+    this.linkdwonFilm,
+    this.sizeFilm,
+    this.description,
+    this.encoderFilm,
+    this.dubSound,
+    this.dubled,
+    this.stickySubtitle,
+    this.subtitleType,});
+
+  Fmovieslinks.fromJson(dynamic json) {
+    qualityFilm = json['quality_film'];
+    linkdwonFilm = json['linkdwon_film'];
+    sizeFilm = json['size_film'];
+    description = json['description'];
+    encoderFilm = json['encoder_film'];
+    dubSound = json['dub_sound'];
+    dubled = json['dubled'];
+    stickySubtitle = json['sticky_subtitle'];
+    subtitleType = json['subtitle_type'];
+  }
+  String? qualityFilm;
+  String? linkdwonFilm;
+  String? sizeFilm;
+  String? description;
+  String? encoderFilm;
+  String? dubSound;
+  String? dubled;
+  String? stickySubtitle;
+  String? subtitleType;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['quality_film'] = qualityFilm;
+    map['linkdwon_film'] = linkdwonFilm;
+    map['size_film'] = sizeFilm;
+    map['description'] = description;
+    map['encoder_film'] = encoderFilm;
+    map['dub_sound'] = dubSound;
+    map['dubled'] = dubled;
+    map['sticky_subtitle'] = stickySubtitle;
+    map['subtitle_type'] = subtitleType;
+    return map;
+  }
+
+}

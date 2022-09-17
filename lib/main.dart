@@ -24,10 +24,13 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.SPLASH,
       debugShowCheckedModeBanner: false,
       getPages: Routes.routes,
+      locale: Locale('fa', 'IR'), // translations will be displayed in that locale
+      fallbackLocale: Locale('fa', 'IR'),
       theme: ThemeData(
 
           scaffoldBackgroundColor: "171717".toColor(),
           primaryColor: AppColor.praimaryColor,
+
 
           brightness: Brightness.dark,
           fontFamily: "Schyler"

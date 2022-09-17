@@ -10,10 +10,12 @@ import 'package:text_scroll/text_scroll.dart';
 import 'package:widget_slider/controller.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:zarfilm_android_tv/app/common/app_color.dart';
+import 'package:zarfilm_android_tv/app/common/app_config.dart';
 import 'package:zarfilm_android_tv/app/widgets/cover_badge.dart';
 
 import '../../../gen/json/base/HomeJsonDataModel.dart';
 import '../../common/app_icons.dart';
+import '../../common/app_route.dart';
 import '../../widgets/HeaderWidget.dart';
 import '../../widgets/HomeSeriesWidget.dart';
 import '../../widgets/HomeMiniWidget.dart';
@@ -50,10 +52,7 @@ class _HomePageState extends State<HomePage> {
       'https://i.picsum.photos/id/816/200/300.jpg?hmac=4O5XSGjimzcjZYOXpVb_--v3rGzmS-3chmG2L1MS-mc',
     ];
 
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
-    ));
+
     return Scaffold(
       backgroundColor: "191919".toColor(),
       bottomNavigationBar: Column(
@@ -75,6 +74,11 @@ class _HomePageState extends State<HomePage> {
             unselectedItemColor: Colors.white,
             items: [
               BottomNavigationBarItem(icon: SvgPicture.string(
+                IconsUtils.homeIcon, color: Colors.white,),
+                  label: "خانه",
+                  activeIcon: SvgPicture.string(
+                    IconsUtils.homeIcon, color: AppColor.praimaryColor,)),
+              BottomNavigationBarItem(icon: SvgPicture.string(
                 IconsUtils.moviesIcon, color: Colors.white,),
                 label: "فیلم ها",
                 activeIcon: SvgPicture.string(
@@ -84,11 +88,7 @@ class _HomePageState extends State<HomePage> {
                   label: "سریال‌ها",
                   activeIcon: SvgPicture.string(
                     IconsUtils.seriesIcon, color: AppColor.praimaryColor,)),
-              BottomNavigationBarItem(icon: SvgPicture.string(
-                IconsUtils.homeIcon, color: Colors.white,),
-                  label: "خانه",
-                  activeIcon: SvgPicture.string(
-                    IconsUtils.homeIcon, color: AppColor.praimaryColor,)),
+
               BottomNavigationBarItem(icon: SvgPicture.string(
                 IconsUtils.watchListIcon, color: Colors.white,),
                   label: "مشاهده‌ها",
@@ -123,20 +123,27 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index, activeIndex) {
                     Suggestions sugg = state.homeJsonDataModel.suggestions!
                         .elementAt(index);
-                    return GetCoverBadge(dubbed: sugg.dubbed!.contains("on")
-                      ,
-                      subtitle: (sugg.subtitle!.contains("on") &&
-                          sugg.dubbed!.contains("on") == false),
-                      child: Container(
-                        //margin: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(sugg.image ?? ""),
+                    return MaterialButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: (){
+                        Get.toNamed(Routes.SINGLEMOVIE,arguments: [sugg.postID??""]);
+
+                      },
+                      child: GetCoverBadge(dubbed: sugg.dubbed!.contains("on")
+                        ,
+                        subtitle: (sugg.subtitle!.contains("on") &&
+                            sugg.dubbed!.contains("on") == false),
+                        child: Container(
+                          //margin: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(sugg.image ?? ""),
+                            ),
+
+
                           ),
-
-
                         ),
                       ),
                     );
@@ -324,25 +331,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("فیلم های جدید", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("فیلم های جدید", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -372,25 +381,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("سریال های دوبله فارسی", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("سریال های دوبله فارسی", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -420,25 +431,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("فیلم های دوبله فارسی", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("فیلم های دوبله فارسی", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -552,25 +565,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("سریال های زیرنویس چسبیده", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("سریال های زیرنویس چسبیده", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -600,25 +615,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("انیمیشن ها", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("انیمیشن ها", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -648,25 +665,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("فیلم های هندی", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("فیلم های هندی", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -696,25 +715,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("انیمه ها", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("انیمه ها", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
@@ -744,25 +765,27 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("سریال های کره ای", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("سریال های کره ای", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],

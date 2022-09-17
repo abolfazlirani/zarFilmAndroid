@@ -23,7 +23,7 @@ class SharedHelper {
   }
 
   String getUserFavorite() {
-    return prefs.getString("userfavorite") ?? "";
+    return prefs.getString("userfavorite") ?? "172732";
   }
 
   String getLanguageModel() {

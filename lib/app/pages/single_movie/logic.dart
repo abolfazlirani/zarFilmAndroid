@@ -1,6 +1,13 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:zarfilm_android_tv/app/common/RequestInterface.dart';
+import 'package:zarfilm_android_tv/app/common/app_config.dart';
 
+import '../../../gen/json/base/FromJsonComment.dart';
+import '../../../gen/json/base/FromJsonSinglePost.dart';
+import '../../common/SharedHelper.dart';
 import '../../common/app_api.dart';
 import 'state.dart';
 
@@ -22,9 +29,31 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
   }
   void sendHomeRequest(){
     apiRequster.request("single?post_id=${postID}", ApiRequster.MHETOD_GET, 1);
+    state.isloading(true);
+    update();
+    //apiRequster.request("single?post_id=${258069}", ApiRequster.MHETOD_GET, 1);
   }
-  void sendAppDataRequest(){
-    apiRequster.request("appData", ApiRequster.MHETOD_GET, 2);
+  void sendCommentRequest(){
+    apiRequster.request("comments?post_id=${postID}", ApiRequster.MHETOD_GET, 2);
+    //apiRequster.request("single?post_id=${258069}", ApiRequster.MHETOD_GET, 1);
+  }  void sendPostCommentRequest()async{
+    state.commentLoading(true);
+    String ip =await Constant.getIP();
+    SharedHelper sharedHelper =await SharedHelper.getInstance();
+    String userid = sharedHelper.getUserFavorite();
+    var bodu = {
+      "user_id":userid,
+      "post_id":postID,
+      "user_ip":ip,
+      "spoil":state.spoilStatus.value?"1":"0",
+      "comment_content":state.commentController.text,
+    };
+    if(state.isReplySomone.value){
+      bodu['responseID'] = state.replyid.value;
+    }
+    print('SingleMovieLogic.sendPostCommentRequest = $bodu');
+    apiRequster.request("sendComment", ApiRequster.MHETOD_POST, 3,body: bodu);
+    //apiRequster.request("single?post_id=${258069}", ApiRequster.MHETOD_GET, 1);
   }
 
   @override
@@ -41,6 +70,7 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
   @override
   void onStartReuqest(int reqCode) {
     // TODO: implement onStartReuqest
+
   }
 
   @override
@@ -48,12 +78,83 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
     // TODO: implement onSucces
     switch(reqCdoe){
       case 1 :
-        //parseJsonFromHome(source);
+        parseJsonFromSingle(source);
         break;
       case 2 :
-        //parseJsonFromSplash(source);
+        parseJsonFromComment(source);
+        break;
+      case 3 :
+        parseJsonFromSendComment(source);
+        break;
+          case 4 :
+        parseJsonFromSendNotif(source);
+        break;
+           case 5 :
+        parseJsonFromSendBookmark(source);
         break;
     }
+  }
+
+  void parseJsonFromSingle(source) {
+    state.fromJsonSinglePost = FromJsonSinglePost.fromJson(jsonDecode(source));
+
+    state.isloading(false);
+    update();
+    sendCommentRequest();
+  }
+
+  void parseJsonFromComment(source) {
+    state.commentList.addAll(FromJsonCommentes.fromJson(jsonDecode(source)).listFrom);
+    update();
+  }
+
+  void parseJsonFromSendComment(source) {
+    Constant.hideKeyboard(Get.context!);
+
+    state.commentLoading(false);
+    Constant.showMessege("نظر شما با موفقیت ثبت شد");
+
+  }
+
+  void sendNotifRequest()async {
+    state.notifLoading.value =true;
+
+    SharedHelper sharedHelper =await SharedHelper.getInstance();
+    String userid = sharedHelper.getUserFavorite();
+    var bodu = {
+      "userID":userid,
+      "postID":postID,
+    };
+
+    apiRequster.request("addToNotif", ApiRequster.MHETOD_POST, 4,body: bodu);
+  }
+  void sendBookRequest()async {
+    state.bookmarkLoading.value =true;
+
+    SharedHelper sharedHelper =await SharedHelper.getInstance();
+    String userid = sharedHelper.getUserFavorite();
+    var bodu = {
+      "userID":userid,
+      "postID":postID,
+    };
+
+    apiRequster.request("addToWishList", ApiRequster.MHETOD_POST, 5,body: bodu);
+  }
+
+  void parseJsonFromSendNotif(source) {
+    state.notifLoading.value =false;
+
+    String messege = jsonDecode(source)['message'];
+    state.notifStatus.value = jsonDecode(source)['falg'];
+    Constant.showMessege(messege);
+  }
+
+  void parseJsonFromSendBookmark(source) {
+    state.bookmarkLoading.value =false;
+
+    String messege = jsonDecode(source)['message'];
+    state.bookmarkStatus.value = jsonDecode(source)['falg'];
+    Constant.showMessege(messege);
   }
 
 

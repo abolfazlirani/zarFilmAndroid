@@ -7,7 +7,7 @@ class AppColor {
   static Color borderColor =const Color(0xffF1F2F3);
   static Color headrColor =const Color(0xffF1F2F3);
   static Color scaffolColor = Colors.white;
-  static Color textGrey =const Color(0xff343434);
+  static Color textGrey =const Color(0xffd0d0d0);
   static Color textGreenColor =const Color(0xff1FB24B);
   static Color appBarColor =const Color(0xffFBFBFB);
   static Color textRedColor =const Color(0xffF1452A);
