@@ -16,6 +16,7 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
 
   late ApiRequster apiRequster;
 
+  String action = "";
   String postID;
 
   SingleMovieLogic(this.postID);
@@ -55,6 +56,19 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
     apiRequster.request("sendComment", ApiRequster.MHETOD_POST, 3,body: bodu);
     //apiRequster.request("single?post_id=${258069}", ApiRequster.MHETOD_GET, 1);
   }
+  void sendCommentAction(String s) async{
+    state.likeLoading(true);
+    SharedHelper sharedHelper =await SharedHelper.getInstance();
+    String userid = sharedHelper.getUserFavorite();
+    action=s;
+    var bodu = {
+      "userID":userid,
+      "postID":postID,
+      "type":s,
+    };
+    apiRequster.request("likeDisLikePost", ApiRequster.MHETOD_POST, 6,body: bodu);
+
+  }
 
   @override
   void onClose() {
@@ -92,12 +106,16 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
            case 5 :
         parseJsonFromSendBookmark(source);
         break;
+               case 6 :
+        parseJsonFromlikedislike(source);
+        break;
     }
   }
 
   void parseJsonFromSingle(source) {
     state.fromJsonSinglePost = FromJsonSinglePost.fromJson(jsonDecode(source));
-
+    state.percent_like.value = state.fromJsonSinglePost.percentLike.toString();
+    state.count_total.value = state.fromJsonSinglePost.likeDisCount.toString();
     state.isloading(false);
     update();
     sendCommentRequest();
@@ -112,7 +130,12 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
     Constant.hideKeyboard(Get.context!);
 
     state.commentLoading(false);
-    Constant.showMessege("نظر شما با موفقیت ثبت شد");
+    if (jsonDecode(source)['flag']) {
+      Constant.showMessege("نظر شما با موفقیت ثبت شد");
+    }else{
+      Constant.showMessege("نظر شما ثبت نشد");
+
+    }
 
   }
 
@@ -155,6 +178,14 @@ class SingleMovieLogic extends GetxController implements RequestInterface {
     String messege = jsonDecode(source)['message'];
     state.bookmarkStatus.value = jsonDecode(source)['falg'];
     Constant.showMessege(messege);
+  }
+
+  void parseJsonFromlikedislike(source) {
+    state.likeLoading(false);
+   state.percent_like.value = jsonDecode(source)['percent_like'].toString();
+   state.count_total.value = jsonDecode(source)['count_total'].toString();
+   Constant.showMessege(jsonDecode(source)['message']);
+
   }
 
 

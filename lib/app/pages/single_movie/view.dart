@@ -219,101 +219,144 @@ class SingleMoviePage extends StatelessWidget {
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
-                                                  Text(
-                                                    "(" +
-                                                        post.likeDisCount
-                                                            .toString() +
-                                                        "رای)",
-                                                    style: TextStyle(
-                                                        fontWeight: FontWeight
-                                                            .w400,
-                                                        fontSize: 7.sp),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 1.w,
-                                                  ),
-                                                  Text(
-                                                    "${post.percentLike
-                                                        .toString()}%",
-                                                    style: TextStyle(
-                                                        fontWeight: FontWeight
-                                                            .bold,
-                                                        fontSize: 10.sp),
-                                                  ),
+                                                  Obx(() {
+                                                    return state.likeLoading.value?Container(
+                                                      margin: EdgeInsets.only(right: 3.w),
+                                                      width: 4.w,height: 4.w,
+                                                      child: CircularProgressIndicator(
+                                                          valueColor: AlwaysStoppedAnimation<
+                                                              Color>(
+                                                              Colors.white)
+                                                      ),
+                                                    ):Row(
+
+                                                      children: [
+                                                        Text(
+                                                          "(" +
+                                                              state.count_total.value +
+                                                              "رای)",
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight
+                                                                  .w400,
+                                                              fontSize: 7.sp),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.w,
+                                                        ),
+                                                        Text(
+                                                          "${state.count_total.value
+                                                              .toString()}%",
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight
+                                                                  .bold,
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                        SizedBox(width: 3.w,),
+
+                                                      ],
+                                                      mainAxisSize: MainAxisSize
+                                                          .min,
+                                                    );
+                                                  }),
                                                   Container(
-                                                    padding: EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 3.w,
-                                                        vertical: 1.w),
+                                                    width: 19.w,
+                                                    height: 3.h,
+
                                                     decoration: BoxDecoration(
                                                         color: "212121"
                                                             .toColor(),
                                                         borderRadius:
                                                         BorderRadius.circular(
                                                             500000)),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                      MainAxisSize.min,
-                                                      children: [
-                                                        Text(
-                                                          "نپسندیدم",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 6.sp,
-                                                            fontWeight:
-                                                            FontWeight.bold,
+                                                    child: MaterialButton(
+          shape: RoundedRectangleBorder(borderRadius:
+          BorderRadius.circular(
+          500000)),
+                                                      padding: EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 3.w,
+                                                          vertical: 1.w),
+                                                      onPressed: () {
+                                                        logic.sendCommentAction(
+                                                            "dislike");
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                        MainAxisSize.min,
+                                                        children: [
+                                                          Text(
+                                                            "نپسندیدم",
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 6.sp,
+                                                              fontWeight:
+                                                              FontWeight.bold,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 3,
-                                                        ),
-                                                        SvgPicture.string(
-                                                          IconsUtils
-                                                              .disLikeIcon,
-                                                          width: 15,
-                                                          color: "cd4b4b"
-                                                              .toColor(),
-                                                        )
-                                                      ],
+                                                          SizedBox(
+                                                            width: 3,
+                                                          ),
+                                                          SvgPicture.string(
+                                                            IconsUtils
+                                                                .disLikeIcon,
+                                                            width: 10,
+                                                            color: "cd4b4b"
+                                                                .toColor(),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                   SizedBox(
                                                     width: 1.w,
                                                   ),
                                                   Container(
-                                                    padding: EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 3.w,
-                                                        vertical: 1.w),
+                                                    width: 17.w,
+                                                    height: 3.h,
+
                                                     decoration: BoxDecoration(
                                                         color: "212121"
                                                             .toColor(),
                                                         borderRadius:
                                                         BorderRadius.circular(
                                                             500000)),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                      MainAxisSize.min,
-                                                      children: [
-                                                        Text(
-                                                          "پسندیدم",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 6.sp,
-                                                            fontWeight:
-                                                            FontWeight.bold,
+                                                    child: MaterialButton(
+                                                      shape: RoundedRectangleBorder(borderRadius:
+                                                      BorderRadius.circular(
+                                                          500000)),
+                                                      padding: EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 3.w,
+                                                          vertical: 1.w),
+                                                      onPressed: () {
+                                                        logic.sendCommentAction(
+                                                            "like");
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                        MainAxisSize.min,
+                                                        children: [
+                                                          Text(
+                                                            "پسندیدم",
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .white,
+                                                              fontSize: 6.sp,
+                                                              fontWeight:
+                                                              FontWeight.bold,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 3,
-                                                        ),
-                                                        SvgPicture.string(
-                                                          IconsUtils.likeIcon,
-                                                          width: 15,
-                                                          color: "2d9536"
-                                                              .toColor(),
-                                                        )
-                                                      ],
+                                                          SizedBox(
+                                                            width: 3,
+                                                          ),
+                                                          SvgPicture.string(
+                                                            IconsUtils.likeIcon,
+                                                            width: 10,
+                                                            color: "2d9536"
+                                                                .toColor(),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -369,7 +412,7 @@ class SingleMoviePage extends StatelessWidget {
                                             color: state.bookmarkStatus.value
                                                 ? AppColor.praimaryColor
                                                 : "d0d0d0".toColor(),
-                                            width: 15,
+                                            width: 12.sp,
                                           ),
 
                                         ],
@@ -415,7 +458,7 @@ class SingleMoviePage extends StatelessWidget {
                                             color: state.notifStatus.value
                                                 ? AppColor.praimaryColor
                                                 : "d0d0d0".toColor(),
-                                            width: 15,
+                                            width: 12.sp,
                                           ),
 
                                         ],
@@ -512,7 +555,7 @@ class SingleMoviePage extends StatelessWidget {
                                       SvgPicture.string(
                                         IconsUtils.playCricleIcon,
                                         color: AppColor.praimaryColor,
-                                        width: 18,
+                                        width: 12.sp,
                                       )
                                     ],
                                   ),
@@ -574,6 +617,8 @@ class SingleMoviePage extends StatelessWidget {
                                             SvgPicture.string(
                                               IconsUtils.ageIcon,
                                               color: AppColor.praimaryColor,
+                                              width: 6.w,
+                                              height: 6.w,
                                             ),
                                             Text(
                                               "رده سنی",
@@ -585,7 +630,7 @@ class SingleMoviePage extends StatelessWidget {
                                             Text(
                                               post.age ?? "",
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.w300,fontSize: 9.sp,
                                                   color: AppColor.textGrey),
                                             ),
                                           ],
@@ -607,7 +652,8 @@ class SingleMoviePage extends StatelessWidget {
                                           children: [
                                             SvgPicture.string(
                                               IconsUtils.langIcon,
-                                              color: AppColor.praimaryColor,
+                                              color: AppColor.praimaryColor, width: 6.w,
+                                                height: 6.w
                                             ),
                                             Text(
                                               "زبان ",
@@ -621,7 +667,7 @@ class SingleMoviePage extends StatelessWidget {
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.w300,fontSize: 9.sp,
 
                                                   color: AppColor.textGrey),
                                             ),
@@ -644,7 +690,8 @@ class SingleMoviePage extends StatelessWidget {
                                           children: [
                                             SvgPicture.string(
                                               IconsUtils.qualityIcon,
-                                              color: AppColor.praimaryColor,
+                                              color: AppColor.praimaryColor, width: 6.w,
+                                                height: 6.w
                                             ),
                                             Text(
                                               "کیفیت",
@@ -680,7 +727,8 @@ class SingleMoviePage extends StatelessWidget {
                                           children: [
                                             SvgPicture.string(
                                               IconsUtils.subTitleIcon,
-                                              color: AppColor.praimaryColor,
+                                              color: AppColor.praimaryColor, width: 6.w,
+                                                height: 6.w
                                             ),
                                             Text(
                                               "زیرنویس",
@@ -697,7 +745,7 @@ class SingleMoviePage extends StatelessWidget {
                                                   : "ندارد",
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.w300,fontSize: 9.sp,
                                                   color: AppColor.textGrey),
                                             ),
                                           ],
@@ -719,7 +767,8 @@ class SingleMoviePage extends StatelessWidget {
                                           children: [
                                             SvgPicture.string(
                                               IconsUtils.dubledIcon,
-                                              color: AppColor.praimaryColor,
+                                              color: AppColor.praimaryColor, width: 6.w,
+                                                height: 6.w
                                             ),
                                             Text(
                                               "دوبله فارسی",
@@ -732,7 +781,7 @@ class SingleMoviePage extends StatelessWidget {
                                               "دارد",
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.w300,
+                                                  fontWeight: FontWeight.w300,fontSize: 9.sp,
                                                   color: AppColor.textGrey),
                                             ),
                                           ],
@@ -826,14 +875,19 @@ class SingleMoviePage extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
+                                  SizedBox(width: 2.w,),
                                   SvgPicture.string(
                                     IconsUtils.cupIcon,
                                     color: AppColor.praimaryColor,
+                                    width: 7.w,
+                                    height: 7.w,
                                   ),
                                   SizedBox(
                                     width: 3.w,
                                   ),
-                                  Text(post.awards ?? "")
+                                  Text(post.awards ?? "",style: TextStyle(
+                                    fontSize: 11.sp
+                                  ),)
                                 ],
                               ),
                             ),

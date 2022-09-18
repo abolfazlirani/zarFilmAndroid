@@ -11,10 +11,13 @@ class SingleMovieState {
   var notifStatus =false.obs;
   var bookmarkStatus =false.obs;
   var commentLoading =false.obs;
+  var likeLoading =false.obs;
   var notifLoading =false.obs;
   var bookmarkLoading =false.obs;
   var replyone ="".obs;
   var replyid ="".obs;
+  var percent_like ="".obs;
+  var count_total ="".obs;
   var commentController =TextEditingController();
   List<CommentModel> commentList = [];
   FromJsonSinglePost fromJsonSinglePost  = FromJsonSinglePost();

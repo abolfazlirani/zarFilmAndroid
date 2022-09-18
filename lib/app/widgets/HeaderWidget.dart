@@ -20,7 +20,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   Widget build(BuildContext context) {
     return  GetLTRWidget(
       child: Container(
-        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: EdgeInsets.fromLTRB(16, 2.h, 16, 0),
         height: 9.h,
         child: Stack(
           children: [
@@ -45,6 +45,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                       child: SvgPicture.string(
                         IconsUtils.user,
                         color: Colors.white,
+                        width: 5.w,
+                        height: 5.w,
                       )),
                 ),
                 Row(
@@ -67,6 +69,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                           child: SvgPicture.string(
                             IconsUtils.searchIcon,
                             color: Colors.white,
+                            width: 5.w,
+                            height: 5.w,
                           )),
                     ),
                     SizedBox(
@@ -112,6 +116,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                           child: SvgPicture.string(
                             IconsUtils.nextIcon,
                             color: Colors.white,
+                            width: 5.w,
+                            height: 5.w,
                           )),
                     ),
                   ],

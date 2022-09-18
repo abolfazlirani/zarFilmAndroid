@@ -129,20 +129,23 @@ class _HomePageState extends State<HomePage> {
                         Get.toNamed(Routes.SINGLEMOVIE,arguments: [sugg.postID??""]);
 
                       },
-                      child: GetCoverBadge(dubbed: sugg.dubbed!.contains("on")
-                        ,
-                        subtitle: (sugg.subtitle!.contains("on") &&
-                            sugg.dubbed!.contains("on") == false),
-                        child: Container(
-                          //margin: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(sugg.image ?? ""),
+                      child: AspectRatio(
+                        aspectRatio: 9/16,
+                        child: GetCoverBadge(dubbed: sugg.dubbed!.contains("on")
+                          ,
+                          subtitle: (sugg.subtitle!.contains("on") &&
+                              sugg.dubbed!.contains("on") == false),
+                          child: Container(
+                            //margin: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(sugg.image ?? ""),
+                              ),
+
+
                             ),
-
-
                           ),
                         ),
                       ),
@@ -169,7 +172,8 @@ class _HomePageState extends State<HomePage> {
                               padding: EdgeInsets.all((1.8).w),
                               child: Center(
                                 child: SvgPicture.string(IconsUtils.PlayIcon,
-                                  color: AppColor.praimaryColor,),
+                                  color: AppColor.praimaryColor,  width: 5.w,
+                                  height: 5.w,),
                               ),
                             ),
                             SizedBox(height: 4,),
@@ -220,7 +224,9 @@ class _HomePageState extends State<HomePage> {
                               padding: EdgeInsets.all((1.8).w),
                               child: Center(
                                 child: SvgPicture.string(IconsUtils.StarIcon,
-                                  color: AppColor.praimaryColor,),
+                                  color: AppColor.praimaryColor,
+                                  width: 5.w,
+                                  height: 5.w,),
                               ),
                             ),
                             SizedBox(height: 4,),
@@ -283,25 +289,27 @@ class _HomePageState extends State<HomePage> {
                           ),)),
                       ),
                       SizedBox(height: 2.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 15.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: "212121".toColor(),
-                                borderRadius: BorderRadius.circular(100)
+                      GetLTRWidget(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 15.w,
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: "212121".toColor(),
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: Center(
+                                child: Text("بیشتر", style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),),
+                              ),
                             ),
-                            child: Center(
-                              child: Text("بیشتر", style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),),
-                            ),
-                          ),
-                          Text("سریال های بروز شده", style: TextStyle(
-                              color: Colors.white.withOpacity(0.5)),),
+                            Text("سریال های بروز شده", style: TextStyle(
+                                color: Colors.white.withOpacity(0.5)),),
 
-                        ],
+                          ],
+                        ),
                       ),
 
                     ],
